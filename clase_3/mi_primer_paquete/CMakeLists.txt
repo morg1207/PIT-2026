@@ -21,10 +21,12 @@ include_directories(
 
 add_executable(publicador_cpp src/publicador.cpp)
 add_executable(publicador_corregido_cpp src/publicador_corregido.cpp)
+add_executable(publicador_loop_cpp src/publicador_loop.cpp)
 add_executable(test_cpp src/hola_mundo.cpp)
 
 target_link_libraries(publicador_cpp ${catkin_LIBRARIES})
 target_link_libraries(publicador_corregido_cpp ${catkin_LIBRARIES})
+target_link_libraries(publicador_loop_cpp ${catkin_LIBRARIES})
 
 
 
