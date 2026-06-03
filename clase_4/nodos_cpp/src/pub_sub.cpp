@@ -16,6 +16,8 @@ void poseCallback(const turtlesim::Pose::ConstPtr& msg)
   ROS_INFO("Posición en [ x: %.3f  y: %.3f]",msg->x,msg->y);
 }
 
+
+
 int main(int argc, char **argv)
 {
   // Inicializando el nodo
@@ -25,7 +27,7 @@ int main(int argc, char **argv)
   ros::NodeHandle n;
 
   // Creo el obejeto suscriptor
-  ros::Subscriber pose_sub = n.subscribe("/turtle1/pose", 1, poseCallback)
+  ros::Subscriber pose_sub = n.subscribe("/turtle1/pose", 1, poseCallback);
 
   ros::Publisher cmd_vel_pub = n.advertise<geometry_msgs::Twist>("/turtle1/cmd_vel",10);
 
