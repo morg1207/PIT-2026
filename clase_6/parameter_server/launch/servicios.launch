@@ -1,0 +1,7 @@
+<launch>
+    <arg name="posicion_final_arg" default="5.0"/>
+   
+    <node pkg="parameter_server" type="servidor_servicio_1_cpp" name="servidor_parabola" output="screen">
+         <param name="/posicion_final" value="$(arg posicion_final_arg)"/>
+    </node>
+</launch>

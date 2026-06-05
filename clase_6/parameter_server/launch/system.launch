@@ -1,0 +1,6 @@
+<launch>
+    <!--Launch turtlesim-->
+    <include file="$(find parameter_server)/launch/robot.launch"/>
+    <!--Launch servicios-->
+    <include file="$(find parameter_server)/launch/servicios.launch"/>
+</launch>
