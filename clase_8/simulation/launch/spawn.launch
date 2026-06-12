@@ -1,0 +1,27 @@
+<launch>
+
+
+  <!-- Declaro argumentos para insertar el robot en una posición específica-->
+  <arg name="x_pos" default="-4.0"/>
+  <arg name="y_pos" default="-2.5"/>
+  <arg name="z_pos" default="2.0"/>
+
+
+  <!-- Creo el parámetro robot_description que contiene el URDF de mi robot-->
+  <arg name="robot" default="$(find pitbot_description)/urdf/pitbot_collisions.urdf"/>
+
+  <param name="robot_description" command="cat $(arg robot)" />
+
+  <!-- Para publicar los tf y suscribirme a joint states-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher"/>
+
+  <!-- Inserto el robot-->
+  <node pkg="gazebo_ros" type="spawn_model" name="spawn_urdf"  args="-urdf -model pit_robot -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -param robot_description" />
+  
+  <!-- Abrir rviz con una configuración determinada  -->
+  <node name="rviz" pkg="rviz" type="rviz" args="-d $(find pitbot_description)/rviz/config.rviz"/>
+
+
+</launch>
+
+

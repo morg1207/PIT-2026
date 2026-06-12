@@ -1,0 +1,150 @@
+ <robot name="robot_pit">
+
+    <!-- Base link -->
+    <link name="base_footprint">
+        <!-- No se necesitan propiedades visuales o de colisión para base_link -->
+    </link>
+
+    <!-- Chassis link -->
+    <link name="chassis_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.8 0.5 0.2"/>
+            </geometry>
+            <material name="rojo">
+                <color rgba="1.0 0.0 0.0 1.0"/>
+            </material>
+        </visual>
+
+        <!-- Colisión del chasis -->
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <box size="0.8 0.5 0.2"/>
+            </geometry>
+        </collision>
+
+        <!-- Inercia del chasis -->
+        <inertial>
+            <mass value="5.0"/>  <!-- Masa del chasis en kg -->
+            <origin xyz="0.0 0.0 0.0"/>
+            <inertia ixx="0.1" ixy="0.0" ixz="0.0" iyy="0.1" iyz="0.0" izz="0.1"/>
+        </inertial>
+    </link>
+
+    <!-- Joint entre base_link y chassis_link -->
+    <joint name="joint_base_chassis" type="fixed">
+        <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        <parent link="base_footprint"/>
+        <child link="chassis_link"/>
+    </joint>
+
+    <!-- Rueda derecha -->
+    <link name="rueda_derecha_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>  <!-- Rotada 90 grados en X -->
+            <geometry>
+                <cylinder radius="0.20" length="0.05"/>
+            </geometry>
+            <material name="azul">
+                <color rgba="0.0 0.0 1.0 1.0"/>
+            </material>
+        </visual>
+
+        <!-- Colisión de la rueda derecha -->
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.20" length="0.05"/>
+            </geometry>
+        </collision>
+
+        <!-- Inercia de la rueda derecha -->
+        <inertial>
+            <mass value="1.0"/>  <!-- Masa de la rueda en kg -->
+            <origin xyz="0.0 0.0 0.0"/>
+            <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.02"/>
+        </inertial>
+    </link>
+
+    <!-- Joint entre chassis_link y rueda derecha -->
+    <joint name="joint_chassis_rueda_derecha" type="continuous">
+        <origin xyz="0.0 0.275 0.0" rpy="1.57 0.0 0.0"/>
+        <parent link="chassis_link"/>
+        <child link="rueda_derecha_link"/>
+        <axis xyz="0.0 0.0 -1.0"/>
+    </joint>
+
+    <!-- Rueda izquierda -->
+    <link name="rueda_izquierda_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>  <!-- Rotada 90 grados en X -->
+            <geometry>
+                <cylinder radius="0.20" length="0.05"/>
+            </geometry>
+            <material name="azul">
+                <color rgba="0.0 0.0 1.0 1.0"/>
+            </material>
+        </visual>
+
+        <!-- Colisión de la rueda izquierda -->
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <cylinder radius="0.20" length="0.05"/>
+            </geometry>
+        </collision>
+
+        <!-- Inercia de la rueda izquierda -->
+        <inertial>
+            <mass value="1.0"/>  <!-- Masa de la rueda en kg -->
+            <origin xyz="0.0 0.0 0.0"/>
+            <inertia ixx="0.01" ixy="0.0" ixz="0.0" iyy="0.01" iyz="0.0" izz="0.02"/>
+        </inertial>
+    </link>
+
+    <!-- Joint entre chassis_link y rueda izquierda -->
+    <joint name="joint_chassis_rueda_izquierda" type="continuous">
+        <origin xyz="0.0 -0.275 0.0" rpy="1.57 0.0 0.0"/>
+        <parent link="chassis_link"/>
+        <child link="rueda_izquierda_link"/>
+        <axis xyz="0.0 0.0 -1.0"/>
+    </joint>
+
+    <!-- Rueda caster (rueda de soporte) -->
+    <link name="rueda_caster_link">
+        <visual>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.10"/>
+            </geometry>
+            <material name="anaranjado">
+                <color rgba="0.5 0.5 0.0 1.0"/>
+            </material>
+        </visual>
+
+        <!-- Colisión de la rueda caster -->
+        <collision>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <geometry>
+                <sphere radius="0.10"/>
+            </geometry>
+        </collision>
+
+        <!-- Inercia de la rueda caster -->
+        <inertial>
+            <mass value="0.5"/>  <!-- Masa de la rueda caster en kg -->
+            <origin xyz="0.0 0.0 0.0"/>
+            <inertia ixx="0.005" ixy="0.0" ixz="0.0" iyy="0.005" iyz="0.0" izz="0.005"/>
+        </inertial>
+    </link>
+
+    <!-- Joint entre chassis_link y rueda caster -->
+    <joint name="joint_chassis_rueda_caster" type="fixed">
+        <origin xyz="0.2 0.0 -0.1" rpy="0.0 0.0 0.0"/>
+        <parent link="chassis_link"/>
+        <child link="rueda_caster_link"/>
+    </joint>
+
+</robot>
